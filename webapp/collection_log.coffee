@@ -14,16 +14,15 @@ logDetailsSchema = new SimpleSchema(
     max: 200
 
   parameter3:
-    type: Number
+    type: String
     label: "less important parameter3"
     min: 0
     max: 200
 
   parameter4:
-    type: Number
+    type: String
     label: "least important parameter4"
-    min: 0
-    max: 200
+#    regEx: /^[0-9]{5}$/
 )
 
 Schemas.Logs = new SimpleSchema(
@@ -38,6 +37,8 @@ Schemas.Logs = new SimpleSchema(
 
   logDetails:
     type: [logDetailsSchema]
+    label: "Log Dump"
+    minCount: 2
 
 #    label: "Last date this log was checked out"
 #    optional: true

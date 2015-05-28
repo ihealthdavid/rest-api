@@ -18,16 +18,14 @@
       max: 200
     },
     parameter3: {
-      type: Number,
+      type: String,
       label: "less important parameter3",
       min: 0,
       max: 200
     },
     parameter4: {
-      type: Number,
-      label: "least important parameter4",
-      min: 0,
-      max: 200
+      type: String,
+      label: "least important parameter4"
     }
   });
 
@@ -42,7 +40,9 @@
       type: Date
     },
     logDetails: {
-      type: [logDetailsSchema]
+      type: [logDetailsSchema],
+      label: "Log Dump",
+      minCount: 2
     }
   });
 

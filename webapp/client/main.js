@@ -296,3 +296,19 @@ Template.databaseCollection.helpers({
     }
   }
 });
+
+
+randomLogData = {
+  appName = fake.fromArray(['iGluco', 'MyVitals1', 'MyVitals2']);
+  userName = Fake.username();
+  created = new Date(Date.UTC(96, 11, 1, 0, 0, 0));
+  min = 0
+  max = 200
+  logDetails1 = {
+    parameter1: Math.floor(Math.random() * (max - min - 1) + min + 1);
+    parameter2: Math.floor(Math.random() * (max - min - 1) + min + 1);
+    parameter3: Fake.sentence([5])
+    parameter4: Fake.word()
+  }
+
+}
