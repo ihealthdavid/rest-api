@@ -1,0 +1,166 @@
+head
+  title api-rest
+
+template(name="appLayout")
+  main#appLayout
+    // {{> headerNavBar }}
+    +yield
+    +footerNavBar
+
+template(name="homePage")
+  #homePage.container.page
+    h1 Logging system
+    .row
+      .col-xs-6.col-lg-6
+        +restStats
+      .col-xs-6.col-lg-6
+        +restApi
+    .row
+      .col-xs-6.col-lg-12
+        +databaseCollection
+
+template(name="firstContentPanel")
+  // <div class="with-top-padding">
+  .panel.panel-default
+    .panel-body
+      .row
+        .col.col-md-6
+          label(for="titleInput") Title
+          input#titleInput.form-control(type="text", placeholder="lorem ipsum...")
+        .col.col-md-6
+          label(for="textInput") Text
+          input#textInput.form-control(type="text", placeholder="lorem ipsum...")
+      hr
+      button#createButton.btn.btn-success INSERT
+  // </div>
+template(name="secondContentPanel")
+  // <div class="with-top-padding">
+  .panel.panel-default
+    .panel-body
+      label(for="findRecordByIdInput") ID To Find
+      input#findRecordByIdInput.form-control(type="text", placeholder="3r09nvt988n8gefijv9jr")
+      hr
+      button#readButton.btn.btn-success FIND
+  // </div>
+template(name="thirdContentPanel")
+  // <div class="with-top-padding">
+  .panel.panel-default
+    .panel-body
+      label(for="updateRecordByIdInput") ID To Update
+      input#updateRecordByIdInput.form-control(type="text", placeholder="3r09nvt988n8gefijv9jr")
+      .row
+        .col.col-md-6
+          label(for="titleUpdateInput") Title
+          input#titleUpdateInput.form-control(type="text", placeholder="lorem ipsum...")
+        .col.col-md-6
+          label(for="textUpdateInput") Text
+          input#textUpdateInput.form-control(type="text", placeholder="lorem ipsum...")
+      hr
+      button#updateButton.btn.btn-success UPDATE
+  // </div>
+template(name="fourthContentPanel")
+  // <div class="with-top-padding">
+  .panel.panel-default
+    .panel-body
+      label(for="deleteRecordByIdInput") ID To Delete
+      input#deleteRecordByIdInput.form-control(type="text", placeholder="3r09nvt988n8gefijv9jr")
+      hr
+      button#deleteButton.btn.btn-success DELETE
+  // </div>
+template(name="fifthContentPanel")
+  .panel.panel-default
+    .panel-body
+      button#listButton.btn.btn-success LIST
+template(name="databaseCollection")
+  #databaseCollectionPanel.panel.panel-default.panel-success(class="{{isDatabasePanelVisible}}")
+    .panel-heading
+      h4 DATABASE COLLECTION
+    .panel-body
+      table.table.table-bordered
+        thead.bold
+        td
+          | ID
+        td
+          | Title
+        td
+          | Text
+        tbody
+          each postsList
+            tr
+              td(width="33%")
+                | {{ _id._str }}
+              td(width="33%")
+                | {{title}}
+              td(width="33%")
+                | {{text}}
+template(name="restApi")
+  #restApiPanel.panel.panel-default.panel-info(class="{{isInterfacePanelVisible}}")
+    .panel-heading
+      h4 REST API
+    .panel-body
+      .col.col-lg-12
+        ul.nav.nav-tabs
+          li#fifthPanelTab(class="{{fifthContentPanelActive}}")
+            a(href="#fifthPanel", data-toggle="tab") List
+          li#firstPanelTab(class="{{firstContentPanelActive}}")
+            a(href="#firstPanel", data-toggle="tab") Insert
+          li#secondPanelTab(class="{{secondContentPanelActive}}")
+            a(href="#secondPanel", data-toggle="tab") Find
+          li#thirdPanelTab(class="{{thirdContentPanelActive}}")
+            a(href="#thirdPanel", data-toggle="tab") Update
+          li#fourthPanelTab(class="{{fourthContentPanelActive}}")
+            a(href="#fourthPanel", data-toggle="tab") Delete
+        #firstContentPanel(class="{{firstContentPanelVisibility}}")
+          +firstContentPanel
+        #secondContentPanel(class="{{secondContentPanelVisibility}}")
+          +secondContentPanel
+        #thirdContentPanel(class="{{thirdContentPanelVisibility}}")
+          +thirdContentPanel
+        #fourthContentPanel(class="{{fourthContentPanelVisibility}}")
+          +fourthContentPanel
+        #fifthContentPanel(class="{{fifthContentPanelVisibility}}")
+          +fifthContentPanel
+      if isResponseVisible
+        .col.col-lg-12
+          .panel.panel-default
+            .panel-body
+              | {{ displayResponse }}
+
+template(name="restStats")
+  #restStatsPanel.panel.panel-default.panel-warning(class="{{isStatisticsPanelVisible}}")
+    .panel-heading
+      ul.list-inline
+        li
+          h4 REST API STATISTICS
+        li.pull-right
+          h4 {{getServerAddress}}
+    .panel-body
+      with getConfigurationRecord
+        .col.col-lg-4
+          #rootPanelTile.centered.panel.panel-default
+            .count-text {{getRootCount}}
+            .label-text /
+        .col.col-lg-4
+          #findPanelTile.centered.panel.panel-default
+            .count-text {{getGetCount}}
+            .label-text /find/
+        .col.col-lg-4
+          #listPanelTile.centered.panel.panel-default
+            .count-text {{getListCount}}
+            .label-text /list/
+        .col.col-lg-4
+          #insertPanelTile.centered.panel.panel-default
+            .count-text {{getInsertCount}}
+            .label-text /insert/
+        .col.col-lg-4
+          #updatePanelTile.centered.panel.panel-default
+            .count-text {{getUpdateCount}}
+            .label-text /update/
+        .col.col-lg-4
+          #deletePanelTile.centered.panel.panel-default
+            .count-text {{getDeleteCount}}
+            .label-text /delete/
+    .panel-footer
+      a(href="http://www.ihealthlabs.com") ihealthlabs.com
+      a(href="http://github.com/ihealthdavid") source
+                                    

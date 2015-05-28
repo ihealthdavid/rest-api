@@ -25,3 +25,5 @@ Posts.allow({
     return true;
   }
 });
+
+
